@@ -60,7 +60,7 @@ use test
 )
 select 
 	EmployeeID,
-	FirstName + LastName as Name,
+	replicate(' I ',EmployeeLevel-1) + FirstName + LastName as Name,
 	Title,
 	EmployeeLevel
  from cte

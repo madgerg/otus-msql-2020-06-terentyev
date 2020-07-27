@@ -1,12 +1,12 @@
 /*
-2. ќтобразить все мес¤цы, где обща¤ сумма продаж превысила 10 000
+2. Отобразить все месяцы, где общая сумма продаж превысила 10 000
 
-¬ывести:
-* √од продажи
-* ћес¤ц продажи
-* ќбща¤ сумма продаж
+Вывести:
+* Год продажи
+* Месяц продажи
+* Общая сумма продаж
 
-ѕродажи смотреть в таблице Sales.Invoices и св¤занных таблицах.
+Продажи смотреть в таблице Sales.Invoices и связанных таблицах.
 */
 
 use WideWorldImporters
@@ -16,12 +16,12 @@ use WideWorldImporters
   CASE grouping(year(i.InvoiceDate)) 
     WHEN 1 THEN CAST('ALL total' as NCHAR(10))
     ELSE CAST(year(i.InvoiceDate) as NCHAR(5))
-  END as '√од продажи',
+  END as 'Год продажи',
     CASE grouping(month(i.InvoiceDate)) 
     WHEN 1 THEN 'Total month'
     ELSE CAST(month(i.InvoiceDate) as NCHAR(5))
-  END as 'ћес¤ц продажи',
-		SUM(il.UnitPrice) as '—умма продаж'
+  END as 'Месяц продажи',
+		SUM(il.UnitPrice*il.Quantity) as 'Общая сумма продаж'
  from Sales.Invoices i
 		inner join sales.InvoiceLines il
 		 on il.InvoiceID = i.InvoiceID

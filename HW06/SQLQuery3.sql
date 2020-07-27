@@ -31,7 +31,7 @@ use WideWorldImporters -- переключаемся на нашу бд
 	else CAST('bad sales' as NCHAR(10))
   END as 'Кол-во проданого',
 		s.StockItemName as 'Наименование товара',
-		SUM(il.UnitPrice) as '—Сумма продаж',
+		SUM(il.UnitPrice*il.Quantity) as 'Общая сумма продаж',
 		min(InvoiceDate) as 'Дата первой продажи',
 		SUM(il.Quantity) as 'Кол-во проданого'
  from Sales.Invoices i --откуда берем данные
