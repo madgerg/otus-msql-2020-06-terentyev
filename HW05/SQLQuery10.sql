@@ -33,14 +33,14 @@ use test;
 GO
 CREATE TABLE People(
 	id 	int not null identity(1, 1)  primary key, --первичный ключ
-	fio	varchar(50) ,
+	fio	nvarchar(50) ,
 	d_r	datetime2,
-	tel	varchar(20)
+	tel	nvarchar(20)
 )
 CREATE TABLE Model(
 	id 			int not null identity(1, 1)  primary key,		--первичный ключ
-	ModelName 	varchar(100) ,
-	Autor 		varchar(50)  ,
+	ModelName 	nvarchar(100) ,
+	Autor 		nvarchar(50)  ,
 	Price 		money 
 );
 
@@ -48,7 +48,7 @@ CREATE TABLE Orders (
 	id 	int not null identity(1, 1)  primary key,--первичный ключ
 	id_people 		int not null ,
 	id_Model 		int not null ,
-	OrderName  		varchar(100) ,
+	OrderName  		nvarchar(100) ,
 	OrderDate		datetime2,
 	Purshage		int  
 )
