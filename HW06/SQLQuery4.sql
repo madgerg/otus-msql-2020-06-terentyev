@@ -41,27 +41,37 @@ use test
 
 --select * from MyEmployees
 
-;with cte as
-(	
+;with cte 
+as (	
 	select 
 		EmployeeID, 
 		FirstName, 
 		LastName, Title,
 		ManagerID,
-		1 as EmployeeLevel
+		1 as EmployeeLevel, 
+		cast('' as varchar) as "path"
 	from MyEmployees
-	where ManagerID is  null
+	where ManagerID is null
 
 	union all
 
-	select e.EmployeeID, e.FirstName, e.LastName, e.Title, e.ManagerID ,EmployeeLevel + 1
+	select 
+		e.EmployeeID
+		, e.FirstName
+		, e.LastName
+		, e.Title
+		, e.ManagerID 
+		, EmployeeLevel + 1
+		, cast(a."path" +'|'+cast(e.EmployeeID as varchar) as varchar) as "path"
 	from MyEmployees e
 	inner join cte a on a.EmployeeID=e.ManagerID
+
 )
 select 
 	EmployeeID,
 	replicate(' I ',EmployeeLevel-1) + FirstName + LastName as Name,
 	Title,
 	EmployeeLevel
+	--, "path"
  from cte
- order by  Title asc
+ order by "path" ,Name
